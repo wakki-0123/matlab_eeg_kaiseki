@@ -31,19 +31,19 @@ file_path_pupil1 = 'heart_RRI1.csv';
 
 
 % ICA後の脳波ファイルを指定
-%file_path_eeg = 'ebato1.set';
+file_path_eeg = 'ebato1.set';
 
 % chを除いた後の脳波データファイル
-%file_eeg1 = 'eeg_ica1.set';
+file_eeg1 = 'eeg_ica1.set';
 
 % eeglabがあるファイルパス
 %addpath('C:\Users\iw200\Documents\MATLAB\eeg\eeg\functions')
 
 % 整理された脳波の時系列データの入ったsetfile
 % chは除きたいチャンネルの場所(複数指定可能)
-% ch1 = [5,6];
-% file = eeg_ica(file_path_eeg,ch1,file_eeg1);
-% EEG_file = file;
+ ch1 = [5,6];
+ file = eeg_ica(file_path_eeg,ch1,file_eeg1);
+ EEG_file = file;
 % 瞳孔データのロード (pathは得られた瞳孔データのファイルパス)
 
 file_path_pupil2 = pupil_data_load;
@@ -56,7 +56,7 @@ complete_pupil_file = 'complete_pupil_file1.csv';
 
 
 % 脳波データの切り出し(任意のファイル名)
-% EEG_file_complete = 'finish.set';
+ EEG_file_complete = 'finish.set';
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ここからは，脳波データのサンプル数に依存
@@ -67,7 +67,7 @@ complete_pupil_file = 'complete_pupil_file1.csv';
 csv_pupil_to_heart(heart_start,heart_end,file_path_pupil2,complete_pupil_file);
 
 % 脳波のデータの切り出し
-%eeg_cut(eegevent_start_sample,eegevent_end_sample,EEG_file);
+eeg_cut(eegevent_start_sample,eegevent_end_sample,EEG_file);
 
 % 心拍の時間を脳波のサンプル数に戻す
 eeg_start = heart_start * 125;
@@ -75,7 +75,7 @@ eeg_end = heart_end * 125;
 
 
 
-%eeg_cut(eeg_start,eeg_end,EEG_file,EEG_file_complete);
+eeg_cut(eeg_start,eeg_end,EEG_file,EEG_file_complete);
 disp(eeg_start);
 disp(eeg_end);
     
