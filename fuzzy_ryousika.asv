@@ -37,8 +37,8 @@ y = data;
 %y = medfilt1(data,thredshold,'omitnan','truncate');%メジアン補間(NaNの処理)
 y = fillmissing(y,'linear');%線形補間
 y = filloutliers(y,'linear','movmedian',thredshold);
-% ここを変えよう1
-y = y(200:3000);
+% 10秒間のデータ
+y = y(200:1200);
 
 % 量子化のビン数
 num_bins = 30;
@@ -73,11 +73,8 @@ y1 = data1;
 y1 = fillmissing(y1,'linear');%線形補間
 y1 = filloutliers(y1,'linear','movmedian',thredshold);
 
-% ここを変えよう2
-y1 = y1(200:3000);
-
-
-
+% 10秒間のデータ
+y1 = y1(200:1200);
 % 量子化の範囲
 quantization_range2 = linspace(min(y1), max(y1), num_bins+1);
 %quantization_range3 = linspace(min(y), 4, num_bins+1);
@@ -131,11 +128,12 @@ e1 = fuzzymsentropy(quantized_data_1,m,mf,rn,local,tau,factor);
 e2 = fuzzymsentropy(quantized_data2,m,mf,rn,local,tau,factor);
 e3 = fuzzymsentropy(quantized_data2_1,m,mf,rn,local,tau,factor);
 
+disp(e)
 
-e = e';
-e1 = e1';
-e2 = e2';
-e3 = e3';
+% e = e';
+% e1 = e1';
+% e2 = e2';
+% e3 = e3';
 
 
 
@@ -202,6 +200,11 @@ e7 = e7';
 % num_epoch7 = size(e7, 1);
 
 
+figure 
+plot(1/100:1/100:1/100*factor,e3,'b');
+hold on
+errorbar(1/100:1/100:1/100*factor,mean(e3,1),std(e3,1),'r');
+
 
 
 if(k==0)
@@ -231,12 +234,10 @@ title([b,'Right quantized data sample rate 60Hz'])
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 subplot(2,4,5)
 
-plot(1/100:1/100:1/100*factor,e,'r');
-hold on
+%plot(1/100:1/100:1/100*factor,e,'r');
 errorbar(1/100:1/100:1/100*factor,mean(e,1),std(e,1),'r');
-
-
-errorbar(1/100:1/100:1/100*factor,mean(e4,1),std(e4),'b');
+hold on
+errorbar(1/100:1/100:1/100*factor,mean(e4),std(e4),'b');
 
 legend('ORG','IAAFT','Location','southeast');
 set(gca, 'XScale', 'log');
@@ -247,10 +248,9 @@ xlabel('time scale[sec]');
 ylabel('fuzzy entropy');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 subplot(2,4,6)
-plot(1/100:1/100:1/100*factor,e1,'r');
-hold on
+%plot(1/100:1/100:1/100*factor,e1,'r');
 errorbar(1/100:1/100:1/100*factor,mean(e1,1),std(e1,1),'r');
-
+hold on
 errorbar(1/100:1/100:1/100*factor,mean(e5),std(e5),'b');
 legend('ORG','IAAFT','Location','southeast');
 set(gca, 'XScale', 'log');
@@ -261,10 +261,9 @@ xlabel('time scale[sec]');
 ylabel('fuzzy entropy');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 subplot(2,4,7)
-plot(1/100:1/100:1/100*factor,e2,'r');
-hold on
+%plot(1/100:1/100:1/100*factor,e2,'r');
 errorbar(1/100:1/100:1/100*factor,mean(e2,1),std(e2,1),'r');
-
+hold on
 errorbar(1/100:1/100:1/100*factor,mean(e6),std(e6),'b');
 legend('ORG','IAAFT','Location','southeast');
 set(gca, 'XScale', 'log');
@@ -275,9 +274,9 @@ xlabel('time scale[sec]');
 ylabel('fuzzy entropy');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 subplot(2,4,8)
-plot(1/100:1/100:1/100*factor,e3,'r');
-hold on
+%plot(1/100:1/100:1/100*factor,e3,'r');
 errorbar(1/100:1/100:1/100*factor,mean(e3,1),std(e3,1),'r');
+hold on
 errorbar(1/100:1/100:1/100*factor,mean(e7),std(e7),'b');
 legend('ORG','IAAFT','Location','southeast');
 set(gca, 'XScale', 'log');
