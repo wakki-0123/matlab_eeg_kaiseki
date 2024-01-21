@@ -2,8 +2,8 @@ function path = pupil_data_load
     % ファイルパス
     %addpath 'C:\Users\iw200\Documents\MATLAB\eeg\eeg'
     %addpath 'C:\Users\iw200\Documents\MATLAB\eeg\eeglab2023.1'
-    addpath 'C:\Users\iw200\Documents\MATLAB\eeg\pupil';
-    inputFilePath = 'after_gazedata.csv';
+    %addpath 'C:\Users\iw200\Documents\MATLAB\eeg\pupil';
+    inputFilePath = 'gazedata';
 
     % ファイルを読み込み、各行ごとにJSONを読み込む
     fid = fopen(inputFilePath, 'r');
@@ -69,7 +69,7 @@ function path = pupil_data_load
     outputTable = struct2table(outputDataStructArray);
 
     % CSVファイルに書き込み
-    csvFilePath = 'after_pupil_diameter.csv';
+    csvFilePath = '0120_pupil_diameter.csv';
     writetable(outputTable, csvFilePath);
 
     % 生成されたCSVファイルが保存されたパスを確認

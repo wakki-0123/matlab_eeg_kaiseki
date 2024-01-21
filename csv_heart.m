@@ -59,7 +59,7 @@ end
 time = b(start_index:1:end_index,1);
 RRI = b(start_index:1:end_index,2);
 
- file = 'heart_RRI_complete_1206.csv';
+ file = 'heart_RRI_complete_0120.csv';
   %csvに書き出し
  combinedata = [time,RRI];
  writematrix(combinedata,file); %ファイル名は任意

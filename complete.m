@@ -31,30 +31,30 @@ function complete(eegevent_start_sample,eegevent_end_sample)
 % 瞳孔データのgzファイルを展開
 %addpath 'C:\Users\iw200\Documents\MATLAB\eeg\eeglab2023.1'
 
-addpath 'C:\Users\iw200\Documents\MATLAB\eeg\pupil'
+%addpath 'C:\Users\iw200\Documents\MATLAB\eeg\pupil'
 gzFilePath = 'gazedata.gz'; 
 gz_expand(gzFilePath);
 
 
 % 心拍データ1(元データ)のパス
-file_path_heart1 = 'before.csv';
+file_path_heart1 = 'ebato_0120.csv';
 
 % 心拍のデータ2(経過時間とRRI)の出力先　任意指定
-file_path_pupil1 = 'heart_RRI0118.csv'; 
+file_path_pupil1 = 'heart_RRI0120.csv'; 
 
 
 % ICA後の脳波ファイルを指定
-file_path_eeg = '0118_save0.set';
+file_path_eeg = 'ebato_0120_280_ICA.set';
 
 % chを除いた後の脳波データファイル 手作業後のファイル
-file_eeg1 = 'eeg_ica0118.set';
+file_eeg1 = 'eeg_ica0120.set';
 
 % eeglabがあるファイルパス
 %addpath('C:\Users\iw200\Documents\MATLAB\eeg\eeg\functions')
 
 % 整理された脳波の時系列データの入ったsetfile
 % chは除きたいチャンネルの場所(複数指定可能)
- ch1 = [5,6];
+ ch1 = [6];
  file = eeg_ica(file_path_eeg,ch1,file_eeg1);
  EEG_file = file; % おそらく心拍の同期がとれていない状態の脳波データ
 % 瞳孔データのロード (pathは得られた瞳孔データのファイルパス)
@@ -65,13 +65,13 @@ file_path_pupil2 = pupil_data_load;
 file_path_heart2 = header_without(file_path_heart1,file_path_pupil1);
 
 % 切り出した瞳孔データの出力先(任意指定)
-complete_pupil_file = 'complete_pupil_file0118.csv';
+complete_pupil_file = 'complete_pupil_file0120.csv';
 
 % 脳波データの切り出し　心拍の同期がとれていない脳波データ(任意のファイル名)
- EEG_file_hypothesis = 'hypothesis0118.set'; % おそらく心拍の同期がとれていない脳波データ
+ EEG_file_hypothesis = 'hypothesis0120.set'; % おそらく心拍の同期がとれていない脳波データ
 
 % 脳波データの切り出し(任意のファイル名)
- EEG_file_complete = 'finish0118.set'; % おそらく心拍の同期がとれている脳波データ
+ EEG_file_complete = 'finish0120.set'; % おそらく心拍の同期がとれている脳波データ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ここからは，脳波データのサンプル数に依存
