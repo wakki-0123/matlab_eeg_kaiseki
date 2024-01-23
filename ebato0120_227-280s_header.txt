@@ -1,0 +1,2 @@
+Version,Subject,Recording,Startdate,Startime,Bytes,Reserved,NumRec,Duration,NumSig
+.BIOSEMI,X X 13-May-1951 Anonymous                                                       ,Startdate 21-Jan-2024                                                           ,21.01.24,13.54.22,2560    ,                                            ,52,1       ,9

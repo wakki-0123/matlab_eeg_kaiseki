@@ -36,11 +36,18 @@ gzFilePath = 'gazedata.gz';
 gz_expand(gzFilePath);
 
 
-% 心拍データ1(元データ)のパス
+% 心拍データ(元データ)のパス
 file_path_heart1 = 'ebato_0120.csv';
 
-% 心拍のデータ2(経過時間とRRI)の出力先　任意指定
+% 心拍データ(元データ)のパス HF,LF
+file_path_heart0 = 'ebato_0120_LF_HF.csv';
+
+% 心拍のデータ(経過時間とRRI)の出力先　任意指定
 file_path_pupil1 = 'heart_RRI0120.csv'; 
+
+% 心拍のデータ(LF,HF)の出力先　任意指定
+file_path_heart3 = 'heart_RRI0120_LF_HF.csv'; 
+
 
 
 % ICA後の脳波ファイルを指定
@@ -61,23 +68,39 @@ file_eeg1 = 'eeg_ica0120.set';
 
 file_path_pupil2 = pupil_data_load;
 
-% 心拍データ2のロード
+% 心拍データのロード(RRI)
 file_path_heart2 = header_without(file_path_heart1,file_path_pupil1);
 
-% 切り出した瞳孔データの出力先(任意指定)
-complete_pupil_file = 'complete_pupil_file0120.csv';
+% 心拍データのロード(HF,LF)
+file_path_heart3 = header_without_LF_HF(file_path_heart0,file_path_heart3);
+
+
+% 切り出した瞳孔データの出力先(任意指定) 10-226s
+complete_pupil_file = 'complete_pupil_file0120_full.csv';
 
 % 脳波データの切り出し　心拍の同期がとれていない脳波データ(任意のファイル名)
- EEG_file_hypothesis = 'hypothesis0120.set'; % おそらく心拍の同期がとれていない脳波データ
+ %EEG_file_hypothesis = 'hypothesis0120.set'; % おそらく心拍の同期がとれていない脳波データ
 
 % 脳波データの切り出し(任意のファイル名)
- EEG_file_complete = 'finish0120.set'; % おそらく心拍の同期がとれている脳波データ
+ EEG_file_complete = 'finish0120_full.set'; % おそらく心拍の同期がとれている脳波データ
+
+% 心拍データの最終的な出力先(RRI)
+ output_heart_file = 'heart_RRI_complete_0120_full.csv';
+
+% % 心拍データの最終的な出力先(LF,HF)
+ output_heart_file1 = 'heart_HRV_complete_0120_full.csv';
+ 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ここからは，脳波データのサンプル数に依存
 
-% 心拍データの切り出し
-[heart_start,heart_end] = csv_heart(eegevent_start_sample,eegevent_end_sample,file_path_heart2);
+% 心拍データの切り出し(RRI)
+[heart_start,heart_end] = csv_heart(eegevent_start_sample,eegevent_end_sample,file_path_heart2,output_heart_file);
+
+% 心拍データの切り出し(LF,HF)
+csv_heart_HRV(eegevent_start_sample,eegevent_end_sample,file_path_heart3,output_heart_file1);
+
 disp('心拍データの切り出した秒数の区間')
 disp(heart_start)
 disp(heart_end)

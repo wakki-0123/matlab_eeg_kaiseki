@@ -1,4 +1,4 @@
-function [heart_start,heart_end] = csv_heart(eegevent_start,eegevent_end,file1,file)
+function csv_heart_HRV(eegevent_start,eegevent_end,file1,file)
 
 %addpath('C:\Users\iw200\OneDrive\ドキュメント\MATLAB\Examples\R2023b\matlab\EEG\eeglab2023.1')
 
@@ -57,11 +57,15 @@ end
 
  %心拍データの抽出
 time = b(start_index:1:end_index,1);
-RRI = b(start_index:1:end_index,2);
+LF = b(start_index:1:end_index,2);
+HF = b(start_index:1:end_index,3);
+LHF = b(start_index:1:end_index,4);
+
+
 
  %file = 'heart_RRI_complete_0120.csv';
   %csvに書き出し
- combinedata = [time,RRI];
+ combinedata = [time,LF,HF,LHF];
  writematrix(combinedata,file); %ファイル名は任意
 
  disp(['心拍データのCSVファイルが保存されました: ' file]);
