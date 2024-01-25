@@ -25,7 +25,7 @@ ch = ["F3" "F4" "C3" "C4" "P3" "P4" "Po3" "Po4"];
 
 % 最初の信号
     %file_name = strcat(pwd,"\",string(s_day(subject_i)),"\",char(s_name(subject_i)),"\m0\close\",char(s_epoch(j)),"_data.txt");
-    file_name = "ebato_0120_30-224s_analyze.txt"; % 読み込みたい脳波データ
+    file_name = "ebato_0120_full_data_0122.txt"; % 読み込みたい脳波データ
 
     %file_name = strcat(pwd,"\807\C\m0\open\",char(s_epoch(j)),"_data.txt");
     EEG_data = readmatrix(file_name); %ファイルのデータ読み込み

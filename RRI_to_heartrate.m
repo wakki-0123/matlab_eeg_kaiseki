@@ -1,6 +1,6 @@
 function RRI_to_heartrate
 Fs = 1000;
-file = 'heart_RRI_complete_0120_30-224s.csv';
+file = 'heart_RRI_complete_0120_full.csv';
 data = readmatrix(file);
 originaltime = data(:, 1);
 originalRRI = data(:, 2);
