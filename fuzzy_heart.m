@@ -1,4 +1,4 @@
-function y = fuzzy_heart(c,maxiter,m,factor,mf,rn,local,tau)
+function y = fuzzy_heart(c,maxiter,m,factor,mf,rn,local,tau,file)
 
 % 瞳孔処理専用のプログラム
 % 元データの前処理とIAAFT、そしてファジーエントロピーを用いたマルチスケールファジーエントロピー解析
@@ -24,7 +24,7 @@ function y = fuzzy_heart(c,maxiter,m,factor,mf,rn,local,tau)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %file = 'before_pupil_diameter.csv'; %任意のファイルのパス
 %file1 = 'after_pupil_diameter.csv'
-file = 'heart_rate1.csv';
+%file = 'heart_rate1.csv';
 data = readmatrix(file);%ファイルの読み込み
 %data = data0(:,2); %left diameter
 y = data;
