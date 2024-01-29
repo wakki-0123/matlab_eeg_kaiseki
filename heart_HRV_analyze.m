@@ -1,6 +1,6 @@
 function heart_HRV_analyze
 % HRVを表示するプログラム
-file = 'heart_HRV_complete_0120_full.csv';
+file = 'heart_HRV_complete_ebato0128.csv';
 data = readmatrix(file);
 data1 = data(:,1);
 data3 = data(:,3);

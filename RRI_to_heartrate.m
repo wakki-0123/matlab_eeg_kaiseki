@@ -1,6 +1,6 @@
-function RRI_to_heartrate
+function heart_rate = RRI_to_heartrate
 Fs = 1000;
-file = 'heart_RRI_complete_0120_full.csv';
+file = 'heart_RRI_complete_ebato0128.csv';
 data = readmatrix(file);
 originaltime = data(:, 1);
 originalRRI = data(:, 2);
@@ -47,7 +47,7 @@ legend;
 
 subplot(2,1,2);
 plot(newTime_1, resampledRRI, 'b', 'DisplayName', 'Resampled RRI');
-xlabel('Time (s)');
+xlabel('samples');
 ylabel('R-R Interval');
 title('Resampled RRI');
 legend;
@@ -55,11 +55,20 @@ legend;
 % 心拍数のグラフの描画
 figure;
 plot(newTime_1, heart_rate, 'g', 'DisplayName', 'Heart Rate (BPM)');
-xlabel('Time (s)');
+xlabel('samples');
 ylabel('Heart Rate (BPM)');
 title('Heart Rate');
 legend;
 
+
+
+% 心拍数のグラフの描画
+figure;
+plot((newTime_1/60), heart_rate, 'g', 'DisplayName', 'Heart Rate (BPM)');
+xlabel('Time(s)');
+ylabel('Heart Rate (BPM)');
+title('Heart Rate');
+legend;
 % グリッドを表示
 grid on;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -37,31 +37,31 @@ gz_expand(gzFilePath);
 
 
 % 心拍データ(元データ)のパス
-file_path_heart1 = 'ebato_0120.csv';
+file_path_heart1 = 'ebato_0128_RRI.csv';
 
 % 心拍データ(元データ)のパス HF,LF
-file_path_heart0 = 'ebato_0120_LF_HF.csv';
+file_path_heart0 = 'ebato_0128_HRV.csv';
 
 % 心拍のデータ(経過時間とRRI)の出力先　任意指定
-file_path_pupil1 = 'heart_RRI0120.csv'; 
+file_path_pupil1 = 'heart_RRI0128.csv'; 
 
 % 心拍のデータ(LF,HF)の出力先　任意指定
-file_path_heart3 = 'heart_RRI0120_LF_HF.csv'; 
+file_path_heart3 = 'heart_RRI0128_LF_HF.csv'; 
 
 
 
 % ICA後の脳波ファイルを指定
-file_path_eeg = 'ebato_0120_280_ICA.set';
+file_path_eeg = 'ebato_0128_eeg.set';
 
 % chを除いた後の脳波データファイル 手作業後のファイル
-file_eeg1 = 'eeg_ica0120.set';
+file_eeg1 = 'eeg_ica0128.set';
 
 % eeglabがあるファイルパス
 %addpath('C:\Users\iw200\Documents\MATLAB\eeg\eeg\functions')
 
 % 整理された脳波の時系列データの入ったsetfile
 % chは除きたいチャンネルの場所(複数指定可能)
- ch1 = [6];
+ ch1 = [8];
  file = eeg_ica(file_path_eeg,ch1,file_eeg1);
  EEG_file = file; % おそらく心拍の同期がとれていない状態の脳波データ
 % 瞳孔データのロード (pathは得られた瞳孔データのファイルパス)
@@ -76,19 +76,19 @@ file_path_heart3 = header_without_LF_HF(file_path_heart0,file_path_heart3);
 
 
 % 切り出した瞳孔データの出力先(任意指定) 10-226s
-complete_pupil_file = 'complete_pupil_file0120_full.csv';
+complete_pupil_file = 'complete_pupil_ebato0128.csv';
 
 % 脳波データの切り出し　心拍の同期がとれていない脳波データ(任意のファイル名)
  %EEG_file_hypothesis = 'hypothesis0120.set'; % おそらく心拍の同期がとれていない脳波データ
 
 % 脳波データの切り出し(任意のファイル名)
- EEG_file_complete = 'finish0120_full.set'; % おそらく心拍の同期がとれている脳波データ
+ EEG_file_complete = 'finish_ebato0128.set'; % おそらく心拍の同期がとれている脳波データ
 
 % 心拍データの最終的な出力先(RRI)
- output_heart_file = 'heart_RRI_complete_0120_full.csv';
+ output_heart_file = 'heart_RRI_complete_ebato0128.csv';
 
 % % 心拍データの最終的な出力先(LF,HF)
- output_heart_file1 = 'heart_HRV_complete_0120_full.csv';
+ output_heart_file1 = 'heart_HRV_complete_ebato0128.csv';
  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

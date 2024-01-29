@@ -4,7 +4,7 @@ function gz_expand(gzFilePath)
 
 % 展開先のディレクトリ
 %outputDirectory = 'C:\Users\iw200\Documents\MATLAB\eeg\eeglab2023.1\';
-outputDirectory = 'C:\Users\iw200\OneDrive\ドキュメント\MATLAB\Examples\R2023b\matlab\jikken_0120';
+outputDirectory = 'C:\Users\iw200\Documents\MATLAB\eeg\eeglab2023.1';
 
 % gunzip関数を使用してファイルを展開
 gunzip(gzFilePath, outputDirectory);
