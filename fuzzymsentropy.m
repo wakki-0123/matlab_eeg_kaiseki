@@ -14,6 +14,7 @@ y=y/std(y);
 for i=1:factor
    s=coarsegraining(y,i);
    sampe=FuzEn_MFs(s, m, mf, rn, local,tau);
-   e(i)=sampe;   
+   e(i)=sampe;  
+   clear e(i) sampe s
 end
 e=e';

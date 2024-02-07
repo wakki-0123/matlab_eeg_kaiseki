@@ -26,9 +26,9 @@ function [y,y1] = fuzzy_wakita(thredshold,c,maxiter,m,factor,mf,rn,local,tau,fil
 %file1 = 'after_pupil_diameter.csv'
 data0 = readmatrix(file);%ファイルの読み込み
 %data = data0(:,2); %left diameter
-data = data0(1:26177,2); %left diameter cut
+data = data0(:,2); %left diameter cut
 %data = data0(:,3); %right diameter
-data1 = data0(1:26177,3);%right diameter cut
+data1 = data0(:,3);%right diameter cut
 
 
 %前処理
@@ -143,11 +143,11 @@ title('right');
 xlabel('time scale[sec]');
 ylabel('sample entropy');
 
-savedir = 'C:\Users\iw200\Documents\MATLAB\eeg\eeg_kaiseki';
-for i=1:4
-    fig_handle = figure(i);
-    saveas(fig_handle,fullfile(savedir,['figure_' num2str(i) '.png']));
-end
+% savedir = 'C:\Users\iw200\Documents\MATLAB\eeg\eeg_kaiseki';
+% for i=1:4
+%     fig_handle = figure(i);
+%     saveas(fig_handle,fullfile(savedir,['figure_' num2str(i) '.png']));
+% end
 
 
 %パワー解析も入れてみた
