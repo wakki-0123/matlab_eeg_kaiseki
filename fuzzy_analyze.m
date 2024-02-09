@@ -75,6 +75,7 @@ for k = 2:2:l-1
     xline(xValue1, 'g', 'LineWidth', 1);
 end
 
+
 legend('ORG','gray start','fear start','Location','southeast');
 title('Left original pupil data');
 xlabel('time scale[s]');
@@ -193,16 +194,48 @@ e_right_numeric_combined = reshape(e_right_combined, num_elements, []);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % あってるやつ
 figure
-contourf(e_left_numeric_combined)
+contourf(e_left_numeric_combined,100)
+
+for k = 2:2:l-1
+    % 縦線の描画（赤）
+    %xValue = data000(k) * 100; % 縦線を描画するxの値
+    xValue = data000(k);
+
+    xline(xValue, 'r', 'LineWidth', 1); % xValueの位置に縦線を描画
+    % 縦線の描画（緑）
+    %xValue1 = data000(k + 1) * 100; % 縦線を描画するxの値
+    xValue1 = data000(k+1);
+    xline(xValue1, 'g', 'LineWidth', 1);
+end
+legend('fuzzy entropy','gray start','fear start','Location','southeast');
 title('Left pupil fuzzy entropy');
 xlabel('time');
 ylabel('time scale');
+xlim([256 259])
+ylim([15 25])
+colorbar;
+
 
 figure
-contourf(e_right_numeric_combined)
+contourf(e_right_numeric_combined,100)
+for k = 2:2:l-1
+    % 縦線の描画（赤）
+    %xValue = data000(k) * 100; % 縦線を描画するxの値
+    xValue = data000(k);
+
+    xline(xValue, 'r', 'LineWidth', 1); % xValueの位置に縦線を描画
+    % 縦線の描画（緑）
+    %xValue1 = data000(k + 1) * 100; % 縦線を描画するxの値
+    xValue1 = data000(k+1);
+    xline(xValue1, 'g', 'LineWidth', 1);
+end
+legend('fuzzy entropy','gray start','fear start','Location','southeast');
 title('right pupil fuzzy entropy');
 xlabel('time [s]');
 ylabel('time scale')
+xlim([256 259])
+ylim([15 25])
+colorbar;
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
