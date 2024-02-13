@@ -3,7 +3,7 @@ function relative_power_analyze()
     Fs = 125;
     electrode_positions = read_ced_file();
     disp(electrode_positions)
-    eeg_file = "ebato_0120_full_data_0122.txt";
+    eeg_file = "ebato_0128_data_2.txt";
     % データの読み込み
     EEG_data = readmatrix(eeg_file); % ファイルのデータ読み込み
 
@@ -22,10 +22,20 @@ function relative_power_analyze()
             Ch_data = zscore(Ch_data);
 
             % 相対αパワーを計算
+            relative_delta_power = compute_relative_delta_power(Ch_data,Fs);
+            relative_theta_power = compute_relative_theta_power(Ch_data,Fs);
             relative_alpha_power = compute_relative_alpha_power(Ch_data,Fs);
+            relative_beta_power = compute_relative_beta_power(Ch_data,Fs);
+            relative_gamma_power = compute_relative_gamma_power(Ch_data,Fs);
+
 
             % 相対αパワーを配列に保存
+            relative_delta_powers(i) = relative_delta_power;
+            relative_theta_powers(i) = relative_theta_power;
             relative_alpha_powers(i) = relative_alpha_power;
+            relative_beta_powers(i) = relative_beta_power;
+            relative_gamma_powers(i) = relative_gamma_power;
+
         else
             disp(['Electrode ', char(electrode_name), ' not found in the electrode positions file.']);
         end
@@ -54,6 +64,34 @@ function relative_power_analyze()
     % トポグラフィカルな表示
     eeglab;
     figure;
+    disp(relative_delta_powers);
+    disp(EEG.locs);
+    
+    % EEG.locs 構造体をセル配列に変換
+    locs_cell = struct2cell(EEG.locs);
+    locs_cell = reshape(locs_cell, [4, numel(ch_names)])';
+    
+    topoplot(relative_delta_powers, '8ch.ced', 'style', 'both', 'electrodes', 'labelpoint');
+    title('Topographical Relative delta Power Mapping');
+    colorbar
+
+
+
+    figure;
+    disp(relative_theta_powers);
+    disp(EEG.locs);
+    
+    % EEG.locs 構造体をセル配列に変換
+    locs_cell = struct2cell(EEG.locs);
+    locs_cell = reshape(locs_cell, [4, numel(ch_names)])';
+    
+    topoplot(relative_theta_powers, '8ch.ced', 'style', 'both', 'electrodes', 'labelpoint');
+    title('Topographical Relative theta Power Mapping');
+    colorbar
+
+
+
+    figure;
     disp(relative_alpha_powers);
     disp(EEG.locs);
     
@@ -63,6 +101,31 @@ function relative_power_analyze()
     
     topoplot(relative_alpha_powers, '8ch.ced', 'style', 'both', 'electrodes', 'labelpoint');
     title('Topographical Relative Alpha Power Mapping');
+    colorbar
+
+    figure;
+    disp(relative_beta_powers);
+    disp(EEG.locs);
+    
+    % EEG.locs 構造体をセル配列に変換
+    locs_cell = struct2cell(EEG.locs);
+    locs_cell = reshape(locs_cell, [4, numel(ch_names)])';
+    
+    topoplot(relative_beta_powers, '8ch.ced', 'style', 'both', 'electrodes', 'labelpoint');
+    title('Topographical Relative beta Power Mapping');
+    colorbar
+
+
+    figure;
+    disp(relative_gamma_powers);
+    disp(EEG.locs);
+    
+    % EEG.locs 構造体をセル配列に変換
+    locs_cell = struct2cell(EEG.locs);
+    locs_cell = reshape(locs_cell, [4, numel(ch_names)])';
+    
+    topoplot(relative_gamma_powers, '8ch.ced', 'style', 'both', 'electrodes', 'labelpoint');
+    title('Topographical Relative gamma Power Mapping');
     colorbar
 end
 
