@@ -1,4 +1,4 @@
-function [y,y1] = fuzzy_analyze(thredshold,m,factor,mf,rn,local,tau)
+function [y,y1] = fuzzy_window_slide(thredshold,m,factor,mf,rn,local,tau)
 
 % 瞳孔処理専用のプログラム
 % 元データの前処理とIAAFT、そしてファジーエントロピーを用いたマルチスケールファジーエントロピー解析
@@ -24,7 +24,7 @@ Fs = 100;
 epoch_length = 1000;
 %データの読み込み
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-addpath 'C:\Users\iw200\OneDrive\ドキュメント\MATLAB\Examples\R2023b\matlab\git_EEGLAB' % 読み込みファイルの場所
+addpath 'C:\Users\iw200\Documents\MATLAB\eeg\eeglab2023.1' % 読み込みファイルの場所
 file = 'complete_pupil_ebato0128.csv'; %任意のファイルのパス
 %file1 = 'after_pupil_diameter.csv'
 data0 = readmatrix(file);%ファイルの読み込み
@@ -104,14 +104,14 @@ ylabel('pupil diameter');
 d = 1;
 % for 内のepoch_lengthを変えることで窓の大きさを変えられる(ここでは100 プログラムの上で定義している)
 y_left = cell(1, ceil(ly/epoch_length));
-for i = 1:epoch_length:ly-epoch_length
+for i = 1:100:ly-epoch_length
     y_left{d} = y(i:i+epoch_length-1);
     d = d + 1;
 end
 
 t = 1;
 y_right = cell(1, ceil(ly1/epoch_length));
-for j = 1:epoch_length:ly1-epoch_length
+for j = 1:100:ly1-epoch_length
     y_right{t} = y1(j:j+epoch_length-1);
     t = t + 1;
 end
@@ -152,19 +152,12 @@ e_right_numeric_combined = reshape(e_right_combined, num_elements, []);
 figure
 contourf(e_left_numeric_combined, 100)
 
-% Rest of the plotting code remains unchanged
-for k = 2:2:l-1
-    % Vertical lines (red)
-    xValue = data000(k)/(epoch_length/Fs);
-    xline(xValue, 'r', 'LineWidth', 1);
-    % Vertical lines (green)
-    xValue1 = data000(k+1)/(epoch_length/Fs);
-    xline(xValue1, 'g', 'LineWidth', 1);
-end
-legend('fuzzy entropy','gray start','fear start','Location','southeast');
+
+legend('fuzzy entropy','Location','southeast');
 title('left pupil fuzzy entropy');
 xlabel('time [s]');
 ylabel('time scale')
+xlim([200 400])
 colorbar;
 
 
@@ -173,18 +166,11 @@ colorbar;
 figure
 contourf(e_right_numeric_combined, 100)
 
-% Rest of the plotting code remains unchanged
-for k = 2:2:l-1
-    % Vertical lines (red)
-    xValue = data000(k)/(epoch_length/Fs);
-    xline(xValue, 'r', 'LineWidth', 1);
-    % Vertical lines (green)
-    xValue1 = data000(k+1)/(epoch_length/Fs);
-    xline(xValue1, 'g', 'LineWidth', 1);
-end
-legend('fuzzy entropy','gray start','fear start','Location','southeast');
+
+legend('fuzzy entropy','Location','southeast');
 title('Right pupil fuzzy entropy');
 xlabel('time [s]');
 ylabel('time scale')
+xlim([200 400])
 colorbar;
 

@@ -38,7 +38,7 @@ y = data;
 y = fillmissing(y,'linear');%線形補間
 y = filloutliers(y,'linear','movmedian',thredshold);
 % ここを変えよう1
-y = y(200:10000);
+%y = y(200:10000);
 
 % 量子化のビン数
 num_bins = 30;
@@ -52,7 +52,7 @@ quantization_range = linspace(min(y), max(y), num_bins+1);
 quantized_data = discretize(y, quantization_range);
 %quantized_data1 = discretize(y, quantization_range1);
 
-originalrate = 100;
+originalrate = 120;
 newrate = 30;
 newrate1 = 60;
 quantized_data = resample(quantized_data,newrate,originalrate);
@@ -74,7 +74,7 @@ y1 = fillmissing(y1,'linear');%線形補間
 y1 = filloutliers(y1,'linear','movmedian',thredshold);
 
 % ここを変えよう2
-y1 = y1(200:3000);
+%y1 = y1(200:3000);
 
 
 
@@ -204,8 +204,8 @@ e7 = e7';
 
 
 
-if(k==0)
-b = 'before'; 
+
+b = 'siraisi'; 
 figure
 subplot(2,4,1)
 plot(quantized_data);
@@ -296,80 +296,80 @@ ylabel('fuzzy entropy');
 
 
 
-else
-a = 'after'; 
-figure
-subplot(2,4,1)
-plot(quantized_data);
-%title('左目　量子化されたデータ データの最小値から最大値までを30等分 30Hz');
-title([a,'Left quantized data sample rate 30Hz'])
-
-subplot(2,4,2)
-plot(quantized_data_1);
-%title('左目　量子化されたデータ データの最小値から最大値までを30等分 60Hz');
-title([a,'Left quantized data sample rate 60Hz'])
-
-subplot(2,4,3)
-plot(quantized_data2);
-%title('右目　量子化されたデータ データの最小値から最大値までを30等分 30Hz');
-title([a,'Right quantized data sample rate 30Hz'])
-
-
-subplot(2,4,4)
-plot(quantized_data2_1);
-%title('右目　量子化されたデータ データの最小値から最大値までを30等分 60Hz');
-title([a,'Right quantized data sample rate 60Hz'])
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-subplot(2,4,5)
-%plot(1/100:1/100:1/100*factor,e,'r');
-errorbar(1/100:1/100:1/100*factor,mean(e,1),std(e,1),'g');
-hold on
-errorbar(1/100:1/100:1/100*factor,mean(e4),std(e4),'b');
-legend('ORG','IAAFT','Location','southeast');
-set(gca, 'XScale', 'log');
-hold off
-title([a,'Left fuzzy entropy sample rate 30Hz']);
-
-xlabel('time scale[sec]');
-ylabel('fuzzy entropy');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-subplot(2,4,6)
-%plot(1/100:1/100:1/100*factor,e1,'r');
-errorbar(1/100:1/100:1/100*factor,mean(e1,1),std(e1,1),'r');
-hold on
-errorbar(1/100:1/100:1/100*factor,mean(e5),std(e5),'b');
-legend('ORG','IAAFT','Location','southeast');
-set(gca, 'XScale', 'log');
-hold off
-title([a,'Left fuzzy entropy sample rate 60Hz']);
-
-xlabel('time scale[sec]');
-ylabel('fuzzy entropy');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-subplot(2,4,7)
-%plot(1/100:1/100:1/100*factor,e2,'r');
-errorbar(1/100:1/100:1/100*factor,mean(e2,1),std(e2,1),'r');
-hold on
-errorbar(1/100:1/100:1/100*factor,mean(e6),std(e6),'b');
-legend('ORG','IAAFT','Location','southeast');
-set(gca, 'XScale', 'log');
-hold off
-title([a,'Right fuzzy entropy sample rate 30Hz']);
-
-xlabel('time scale[sec]');
-ylabel('fuzzy entropy');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-subplot(2,4,8)
-%plot(1/100:1/100:1/100*factor,e3,'r');
-errorbar(1/100:1/100:1/100*factor,mean(e3,1),std(e3,1),'r');
-hold on
-errorbar(1/100:1/100:1/100*factor,mean(e7),std(e7),'b');
-legend('ORG','IAAFT','Location','southeast');
-set(gca, 'XScale', 'log');
-hold off
-title([a,'Right fuzzy entropy sample rate 60Hz']);
-
-xlabel('time scale[sec]');
-ylabel('fuzzy entropy');
-end
+% else
+% a = 'after'; 
+% figure
+% subplot(2,4,1)
+% plot(quantized_data);
+% %title('左目　量子化されたデータ データの最小値から最大値までを30等分 30Hz');
+% title([a,'Left quantized data sample rate 30Hz'])
+% 
+% subplot(2,4,2)
+% plot(quantized_data_1);
+% %title('左目　量子化されたデータ データの最小値から最大値までを30等分 60Hz');
+% title([a,'Left quantized data sample rate 60Hz'])
+% 
+% subplot(2,4,3)
+% plot(quantized_data2);
+% %title('右目　量子化されたデータ データの最小値から最大値までを30等分 30Hz');
+% title([a,'Right quantized data sample rate 30Hz'])
+% 
+% 
+% subplot(2,4,4)
+% plot(quantized_data2_1);
+% %title('右目　量子化されたデータ データの最小値から最大値までを30等分 60Hz');
+% title([a,'Right quantized data sample rate 60Hz'])
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% subplot(2,4,5)
+% %plot(1/100:1/100:1/100*factor,e,'r');
+% errorbar(1/100:1/100:1/100*factor,mean(e,1),std(e,1),'g');
+% hold on
+% errorbar(1/100:1/100:1/100*factor,mean(e4),std(e4),'b');
+% legend('ORG','IAAFT','Location','southeast');
+% set(gca, 'XScale', 'log');
+% hold off
+% title([a,'Left fuzzy entropy sample rate 30Hz']);
+% 
+% xlabel('time scale[sec]');
+% ylabel('fuzzy entropy');
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% subplot(2,4,6)
+% %plot(1/100:1/100:1/100*factor,e1,'r');
+% errorbar(1/100:1/100:1/100*factor,mean(e1,1),std(e1,1),'r');
+% hold on
+% errorbar(1/100:1/100:1/100*factor,mean(e5),std(e5),'b');
+% legend('ORG','IAAFT','Location','southeast');
+% set(gca, 'XScale', 'log');
+% hold off
+% title([a,'Left fuzzy entropy sample rate 60Hz']);
+% 
+% xlabel('time scale[sec]');
+% ylabel('fuzzy entropy');
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% subplot(2,4,7)
+% %plot(1/100:1/100:1/100*factor,e2,'r');
+% errorbar(1/100:1/100:1/100*factor,mean(e2,1),std(e2,1),'r');
+% hold on
+% errorbar(1/100:1/100:1/100*factor,mean(e6),std(e6),'b');
+% legend('ORG','IAAFT','Location','southeast');
+% set(gca, 'XScale', 'log');
+% hold off
+% title([a,'Right fuzzy entropy sample rate 30Hz']);
+% 
+% xlabel('time scale[sec]');
+% ylabel('fuzzy entropy');
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% subplot(2,4,8)
+% %plot(1/100:1/100:1/100*factor,e3,'r');
+% errorbar(1/100:1/100:1/100*factor,mean(e3,1),std(e3,1),'r');
+% hold on
+% errorbar(1/100:1/100:1/100*factor,mean(e7),std(e7),'b');
+% legend('ORG','IAAFT','Location','southeast');
+% set(gca, 'XScale', 'log');
+% hold off
+% title([a,'Right fuzzy entropy sample rate 60Hz']);
+% 
+% xlabel('time scale[sec]');
+% ylabel('fuzzy entropy');
+% end
